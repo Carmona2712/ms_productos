@@ -37,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public List<Product> findAll(){
+    public ResponseEntity<List<Product>> findAll(){
         List<Product> listProducts = new ArrayList<>();
         try{
             listProducts = this.productService.findAll().stream().map(p -> {
@@ -47,8 +47,9 @@ public class ProductController {
             }).collect(Collectors.toList());
         }catch(DataAccessException ex){
             System.out.println("");
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return listProducts;
+        return new ResponseEntity<>(listProducts,HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
