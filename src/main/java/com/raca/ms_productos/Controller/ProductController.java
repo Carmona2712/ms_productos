@@ -59,9 +59,16 @@ public class ProductController {
             product =  productService.findById(id);
             //product.setPort( Integer.parseInt(enviroment.getProperty("local.server.port")));
             product.setPort(port);
-        }catch(DataAccessException ex){
+            //Thread.sleep(2000L);
+        }catch(Exception ex){
             System.err.println("");
         }
+
+       /* boolean ok = false;
+        if(!ok){
+            throw new RuntimeException("No se pudo mostrar el producto");
+        }*/
+
         return product;
     }
 
